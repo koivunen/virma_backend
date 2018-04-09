@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Salasanan resetointi</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+      .containerSuccess {
+        height: 200px;
+        width: 700px;
+        background-color: #717171;
+        color: white;
+        position: absolute;
+        right: 50%;
+        top: 30%;
+        margin-top: -100px;
+        margin-right: -350px;
+      }
+
+      .successText {
+        position: absolute;
+        left: 37%;
+        top: 30%;
+        font-size: 16px;
+      }
+
+      .successButton {
+        position: absolute;
+        top: 50%;
+        left: 40%;
+      }
+
+      .containerDefault {
+        height: 325px;
+        width: 700px;
+        background-color: #717171;
+        color: white;
+        position: absolute;
+        right: 50%;
+        top: 25%;
+        margin-top: -150px;
+        margin-right: -350px;
+        padding: 0 10px 10px 10px;
+      }
+
+      .header {
+        margin-bottom: 20px;
+      }
+
+      .message {
+        font-size: 15px;
+        margin-bottom: 20px;
+        padding-left: 2px;
+      }
+
+      .messageText {
+        position: absolute;
+        left: 8%;
+        top: 30%;
+        font-size: 16px;
+      }
+
+      #square-button-primary {
+        border-radius: 0px;
+        color: white;
+        background-color: #627F9A;
+        border-color: #627F9A;
+      }
+
+      input {
+        border-radius: 0px !important;
+        outline: none;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <% if (message === 'Salasanasi on vaihdettu.') { %>
+      <div class="containerSuccess">
+        <div class="successText">
+          <p><%= message %></p>
+        </div>
+        <div class="successButton">
+          <button id="square-button-primary" class="btn btn-primary btn-sm" onClick="window.location.href = '<%= url %>';">Siirry sovellukseen</button>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="containerDefault">
+        <div class="header">
+          <h2>Salasanan palautus</h2>
+        </div>
+
+        <div class="message">
+          <p><%= message %></p>
+        </div>
+
+        <div class="formDiv">
+          <form method="POST">
+            <div class="form-group">
+              <label for="password">Salasana</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Salasana uudestaan</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+            </div>
+            <button type="submit" id="square-button-primary" class="btn btn-primary-sm">Vaihda salasana</button>
+          </form>
+        </div>
+      </div>
+    <% } %>
+  </body>
+</html>
