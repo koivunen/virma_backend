@@ -3,10 +3,8 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-// Config files for the PostgreSQL server running on the azure server
 const config = require('../config.js');
 
-// Configure sequelize to the PostgreSQL database
 const sequelize = new Sequelize(config.db, config.username, config.password, {
   host: config.host,
   dialect: 'postgres',
