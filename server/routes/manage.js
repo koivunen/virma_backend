@@ -1,7 +1,7 @@
 const db = require('../../db');
 const Model = require('../../db');
 const router = require('express').Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 router.get('/users', users);
 

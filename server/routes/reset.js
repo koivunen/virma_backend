@@ -4,13 +4,10 @@ const sendMailService = require('../services/sendmailService');
 const config = require('../../config.js');
 
 const async = require('async');
-const bcrypt = require('bcrypt');
-const fs = require('fs');
-const Handlebars = require('handlebars');
+const bcrypt = require('bcryptjs');
 const router = require('express').Router();
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-const path = require('path');
 
 router.get('/:token', getResetToken);
 

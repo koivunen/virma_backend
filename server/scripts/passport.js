@@ -1,5 +1,4 @@
-const auth = require('basic-auth');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const LocalStrategy = require('passport-local').Strategy;
 const BasicStrategy = require('passport-http').BasicStrategy;
@@ -60,7 +59,7 @@ module.exports = function(passport, users) {
         return done(null, false, { message: 'Email has already been assigned to a user' });
       }
 
-      User.findOne({ where: { username: username, email: req.body.email } }).then((user) => {
+      User.findOne({ where: { username: username } }).then((user) => {
         if (user) {
           return done(null, false, { message: 'Username has been taken' });
         } else {
