@@ -10,7 +10,7 @@ router.post('/removeUser', removeUser);
 router.post('/updateUser', updateUser);
 
 function users(req, res, next) {
-  Model.users.findAll({ attributes: ['username', 'email', 'admin', 'organization', 'updater_id'] })
+  Model.users.findAll({ attributes: ['name', 'username', 'email', 'admin', 'organization', 'updater_id'] })
     .then(result => {
       res.status(200).send(result);
     }).catch(next);

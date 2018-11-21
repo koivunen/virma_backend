@@ -6,6 +6,7 @@ module.exports = function(sequelize, Sequelize) {
       primaryKey: true,
       autoIncrement: true
     },
+    name: Sequelize.STRING,
     username: {
       type: Sequelize.STRING,
       allowNull: false
