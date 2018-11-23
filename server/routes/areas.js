@@ -6,17 +6,26 @@ const Op = Sequelize.Op;
 
 const CrudService = require('../services/crudService.js');
 
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    next(res.status(403));
+  }
+}
+
 router.post('/all', getAllAreas);
 router.post('/class1_2', getAreasByClass1_2);
 router.post('/class1', getAreasByClass1);
-router.post('/approvals', getApprovals);
-router.post('/userFeatures', getUserFeatures);
-router.post('/areaIndividual', getIndividual);
 
-router.post('/alterUpdater', alterAreaFeatureUpdaterId);
-router.post('/create', createArea);
-router.post('/update', updateArea);
-router.post('/remove', removeArea);
+router.post('/approvals', loggedIn, getApprovals);
+router.post('/userFeatures', loggedIn, getUserFeatures);
+router.post('/areaIndividual', loggedIn, getIndividual);
+
+router.post('/alterUpdater', loggedIn, alterAreaFeatureUpdaterId);
+router.post('/create', loggedIn, createArea);
+router.post('/update', loggedIn, updateArea);
+router.post('/remove', loggedIn, removeArea);
 
 function getAllAreas(req, res, next) {
   Model.areas.findAll().then(result => {
