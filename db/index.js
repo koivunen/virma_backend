@@ -23,6 +23,9 @@ sequelize.authenticate().then(() => {
   console.log('Database connection failed', err);
 });
 
+// This can be used to create tables based on table models
+// sequelize.sync();
+
 const db = {};
 
 // This is for making the different models accessible from the module exports of ./models.'name of the model'

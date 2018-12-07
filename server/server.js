@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
-const ejs = require('ejs');
 const config = require('../config.js');
 const api = require('./api');
 const dbService = require('./services/dbService.js');

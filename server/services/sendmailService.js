@@ -4,7 +4,6 @@ const config = require('../../config.js');
 
 const nodemailer = require('nodemailer');
 const sendmailTransport = require('nodemailer-sendmail-transport');
-const path = require('path');
 const fs = require('fs');
 const Handlebars = require('handlebars');
 
@@ -20,7 +19,7 @@ function sendMailNewUser(info) {
       Model.users.findAll({ where: { admin: true } })
         .then(result => {
           result.forEach(user => { sendMail(user.email, subject, htmlBody); });
-        }).catch(error => console.log(error));
+        });
     });
   }
 }

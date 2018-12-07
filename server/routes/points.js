@@ -6,17 +6,26 @@ const Op = Sequelize.Op;
 
 const CrudService = require('../services/crudService.js');
 
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    next(res.status(403));
+  }
+}
+
 router.post('/all', getAllPoints);
 router.post('/class1_2', getPointsByClass1_2);
 router.post('/class1', getPointsByClass1);
-router.post('/userFeatures', getUserFeatures);
-router.post('/approvals', getApprovals);
-router.post('/pointIndividual', getIndividual);
 
-router.post('/alterUpdater', alterPointFeatureUpdaterId);
-router.post('/create', createPoint);
-router.post('/update', updatePoint);
-router.post('/remove', removePoint);
+router.post('/userFeatures', loggedIn, getUserFeatures);
+router.post('/approvals', loggedIn, getApprovals);
+router.post('/pointIndividual', loggedIn, getIndividual);
+
+router.post('/alterUpdater', loggedIn, alterPointFeatureUpdaterId);
+router.post('/create', loggedIn, createPoint);
+router.post('/update', loggedIn, updatePoint);
+router.post('/remove', loggedIn, removePoint);
 
 function getAllPoints(req, res, next) {
   Model.points.findAll().then(result => {

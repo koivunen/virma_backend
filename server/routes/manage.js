@@ -1,16 +1,28 @@
 const db = require('../../db');
 const Model = require('../../db');
 const router = require('express').Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
-router.get('/users', users);
+function loggedIn(req, res, next) {
+  if (req.user) {
+    if (req.user.dataValues.admin) {
+      next();
+    } else {
+      next(res.status(403));
+    }
+  } else {
+    next(res.status(403));
+  }
+}
 
-router.post('/addUser', addUser);
-router.post('/removeUser', removeUser);
-router.post('/updateUser', updateUser);
+router.get('/users', loggedIn, users);
+
+router.post('/addUser', loggedIn, addUser);
+router.post('/removeUser', loggedIn, removeUser);
+router.post('/updateUser', loggedIn, updateUser);
 
 function users(req, res, next) {
-  Model.users.findAll({ attributes: ['username', 'email', 'admin', 'organization', 'updater_id'] })
+  Model.users.findAll({ attributes: ['name', 'username', 'email', 'admin', 'organization', 'updater_id'] })
     .then(result => {
       res.status(200).send(result);
     }).catch(next);

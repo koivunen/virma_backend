@@ -6,17 +6,26 @@ const Op = Sequelize.Op;
 
 const CrudService = require('../services/crudService.js');
 
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    next(res.status(403));
+  }
+}
+
 router.post('/all', getAllRoutes);
 router.post('/class1_2', getRoutesByClass1_2);
 router.post('/class1', getRoutesByClass_1);
-router.post('/approvals', getApprovals);
-router.post('/userFeatures', getUserFeatures);
-router.post('/lineIndividual', getIndividual);
 
-router.post('/alterUpdater', alterRouteFeatureUpdaterId);
-router.post('/create', createRoute);
-router.post('/update', updateRoute);
-router.post('/remove', removeRoute);
+router.post('/approvals', loggedIn, getApprovals);
+router.post('/userFeatures', loggedIn, getUserFeatures);
+router.post('/lineIndividual', loggedIn, getIndividual);
+
+router.post('/alterUpdater', loggedIn, alterRouteFeatureUpdaterId);
+router.post('/create', loggedIn, createRoute);
+router.post('/update', loggedIn, updateRoute);
+router.post('/remove', loggedIn, removeRoute);
 
 function getAllRoutes(req, res, next) {
   Model.routes.findAll().then(result => {

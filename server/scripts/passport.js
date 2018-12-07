@@ -1,5 +1,4 @@
-const auth = require('basic-auth');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const LocalStrategy = require('passport-local').Strategy;
 const BasicStrategy = require('passport-http').BasicStrategy;
@@ -55,12 +54,12 @@ module.exports = function(passport, users) {
   }));
 
   passport.use('local-signup', new LocalStrategy({ passReqToCallback: true }, (req, username, password, done) => {
-    User.findOne({ where: { email: req.body.email} }).then((user) => {
+    User.findOne({ where: { email: req.body.email } }).then((user) => {
       if (user) {
         return done(null, false, { message: 'Email has already been assigned to a user' });
       }
 
-      User.findOne({ where: { username: username, email: req.body.email } }).then((user) => {
+      User.findOne({ where: { username: username } }).then((user) => {
         if (user) {
           return done(null, false, { message: 'Username has been taken' });
         } else {
@@ -72,6 +71,7 @@ module.exports = function(passport, users) {
             // Create password hash with 10 rounds
             var hashPass = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
             var newUser = User.create({
+              name: req.body.name,
               username: username,
               password: hashPass,
               email: req.body.email,

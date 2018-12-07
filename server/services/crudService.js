@@ -11,9 +11,7 @@ function createLog(operation, model, name = undefined, user = undefined) {
     executor: user ? user : undefined
   }
 
-  Model.logs.create(params).catch(error => {
-    console.log(error);
-  });
+  Model.logs.create(params);
 }
 
 exports.createFeature = function(res, model, params, user) {
