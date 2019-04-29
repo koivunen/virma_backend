@@ -24,13 +24,13 @@
     "helmet": "^3.9.0",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
-    "node-cron": "^1.2.1",
-    "nodemailer": "^4.4.1",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.1.1",
     "nodemailer-sendmail-transport": "^1.0.2",
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.0",
-    "sequelize": "^4.22.11"
+    "sequelize": "^5.7.6"
   }
 }
